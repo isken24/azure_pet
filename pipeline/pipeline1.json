@@ -1,0 +1,247 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.20:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "AzureBlobStorage1",
+								"type": "LinkedServiceReference"
+							},
+							"path": "house-prices-container"
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Street",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Street",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "LandContour",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "LandContour",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Utilities",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Utilities",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Neighborhood",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Neighborhood",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "OverallCond",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "OverallCond",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ExterCond",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ExterCond",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BsmtCond",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BsmtCond",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Heating",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Heating",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CentralAir",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CentralAir",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "GarageType",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GarageType",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "GarageCars",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GarageCars",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "MoSold",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "MoSold",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "YrSold",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "YrSold",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSqlTable2",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2022-12-07T10:46:50Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

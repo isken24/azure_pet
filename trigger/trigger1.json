@@ -1,0 +1,26 @@
+{
+	"name": "trigger1",
+	"properties": {
+		"description": "Executes every day at 01:00 AM.",
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pipeline1",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 15,
+				"startTime": "2022-12-06T21:20:00",
+				"endTime": "2022-12-08T00:58:00",
+				"timeZone": "Central Asia Standard Time"
+			}
+		}
+	}
+}

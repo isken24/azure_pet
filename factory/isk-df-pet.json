@@ -1,0 +1,9 @@
+{
+	"name": "isk-df-pet",
+	"location": "koreacentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "05b56b50-389f-4b6e-bcb7-d486e200d9c7",
+		"tenantId": "87ff7fde-f141-4150-b485-cfdc876fc8b5"
+	}
+}

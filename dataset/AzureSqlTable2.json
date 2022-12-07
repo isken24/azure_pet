@@ -1,0 +1,78 @@
+{
+	"name": "AzureSqlTable2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "demoOutputSQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Street",
+				"type": "varchar"
+			},
+			{
+				"name": "LandContour",
+				"type": "varchar"
+			},
+			{
+				"name": "Utilities",
+				"type": "varchar"
+			},
+			{
+				"name": "Neighborhood",
+				"type": "varchar"
+			},
+			{
+				"name": "OverallCond",
+				"type": "varchar"
+			},
+			{
+				"name": "ExterCond",
+				"type": "varchar"
+			},
+			{
+				"name": "BsmtCond",
+				"type": "varchar"
+			},
+			{
+				"name": "Heating",
+				"type": "varchar"
+			},
+			{
+				"name": "CentralAir",
+				"type": "varchar"
+			},
+			{
+				"name": "GarageType",
+				"type": "varchar"
+			},
+			{
+				"name": "GarageCars",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MoSold",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "YrSold",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "OutputTable"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

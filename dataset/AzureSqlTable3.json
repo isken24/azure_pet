@@ -1,0 +1,17 @@
+{
+	"name": "AzureSqlTable3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "demoOutputSQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "",
+			"table": "avgLotAreaByYears"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

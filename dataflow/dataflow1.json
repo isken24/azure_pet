@@ -1,0 +1,136 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText1",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable3",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "filterYears"
+				},
+				{
+					"name": "aggregateLotArea"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Id as string,",
+				"          MSSubClass as string,",
+				"          MSZoning as string,",
+				"          LotFrontage as string,",
+				"          LotArea as string,",
+				"          Street as string,",
+				"          Alley as string,",
+				"          LotShape as string,",
+				"          LandContour as string,",
+				"          Utilities as string,",
+				"          LotConfig as string,",
+				"          LandSlope as string,",
+				"          Neighborhood as string,",
+				"          Condition1 as string,",
+				"          Condition2 as string,",
+				"          BldgType as string,",
+				"          HouseStyle as string,",
+				"          OverallQual as string,",
+				"          OverallCond as string,",
+				"          YearBuilt as string,",
+				"          YearRemodAdd as string,",
+				"          RoofStyle as string,",
+				"          RoofMatl as string,",
+				"          Exterior1st as string,",
+				"          Exterior2nd as string,",
+				"          MasVnrType as string,",
+				"          MasVnrArea as string,",
+				"          ExterQual as string,",
+				"          ExterCond as string,",
+				"          Foundation as string,",
+				"          BsmtQual as string,",
+				"          BsmtCond as string,",
+				"          BsmtExposure as string,",
+				"          BsmtFinType1 as string,",
+				"          BsmtFinSF1 as string,",
+				"          BsmtFinType2 as string,",
+				"          BsmtFinSF2 as string,",
+				"          BsmtUnfSF as string,",
+				"          TotalBsmtSF as string,",
+				"          Heating as string,",
+				"          HeatingQC as string,",
+				"          CentralAir as string,",
+				"          Electrical as string,",
+				"          {1stFlrSF} as string,",
+				"          {2ndFlrSF} as string,",
+				"          LowQualFinSF as string,",
+				"          GrLivArea as string,",
+				"          BsmtFullBath as string,",
+				"          BsmtHalfBath as string,",
+				"          FullBath as string,",
+				"          HalfBath as string,",
+				"          BedroomAbvGr as string,",
+				"          KitchenAbvGr as string,",
+				"          KitchenQual as string,",
+				"          TotRmsAbvGrd as string,",
+				"          Functional as string,",
+				"          Fireplaces as string,",
+				"          FireplaceQu as string,",
+				"          GarageType as string,",
+				"          GarageYrBlt as string,",
+				"          GarageFinish as string,",
+				"          GarageCars as string,",
+				"          GarageArea as string,",
+				"          GarageQual as string,",
+				"          GarageCond as string,",
+				"          PavedDrive as string,",
+				"          WoodDeckSF as string,",
+				"          OpenPorchSF as string,",
+				"          EnclosedPorch as string,",
+				"          {3SsnPorch} as string,",
+				"          ScreenPorch as string,",
+				"          PoolArea as string,",
+				"          PoolQC as string,",
+				"          Fence as string,",
+				"          MiscFeature as string,",
+				"          MiscVal as string,",
+				"          MoSold as string,",
+				"          YrSold as string,",
+				"          SaleType as string,",
+				"          SaleCondition as string,",
+				"          SalePrice as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     partitionBy('hash', 1)) ~> source1",
+				"source1 filter(toInteger(YrSold) >= 2000 && toInteger(YrSold) <= 2015 && rlike(OverallCond, '7')) ~> filterYears",
+				"filterYears aggregate(groupBy(YrSold),",
+				"     averageLotArea = avg(toInteger(LotArea))) ~> aggregateLotArea",
+				"aggregateLotArea sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+			]
+		}
+	}
+}
