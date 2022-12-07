@@ -167,7 +167,11 @@
 				"     transactionCommit: 'single',",
 				"     reportSuccessOnError: false,",
 				"     outputAssertFailedRows: true,",
-				"     assertFailure_container: 'house-prices-container') ~> sink1",
+				"     assertFailure_container: 'house-prices-container',",
+				"     mapColumn(",
+				"          YrSold,",
+				"          averageLotArea",
+				"     )) ~> sink1",
 				"sort1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
@@ -181,7 +185,11 @@
 				"     transactionCommit: 'single',",
 				"     reportSuccessOnError: false,",
 				"     outputAssertFailedRows: true,",
-				"     assertFailure_container: 'house-prices-container') ~> sink2"
+				"     assertFailure_container: 'house-prices-container',",
+				"     mapColumn(",
+				"          YearBuilt,",
+				"          sumLotArea",
+				"     )) ~> sink2"
 			]
 		}
 	}
