@@ -18,7 +18,18 @@
 						"referenceName": "AzureSqlTable3",
 						"type": "DatasetReference"
 					},
-					"name": "sink1"
+					"name": "sink1",
+					"rejectedDataLinkedService": {
+						"referenceName": "AzureBlobStorage1",
+						"type": "LinkedServiceReference"
+					}
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable4",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
 				}
 			],
 			"transformations": [
@@ -27,6 +38,15 @@
 				},
 				{
 					"name": "aggregateLotArea"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "aggregate1"
+				},
+				{
+					"name": "sort1"
 				}
 			],
 			"scriptLines": [
@@ -120,6 +140,16 @@
 				"source1 filter(toInteger(YrSold) >= 2000 && toInteger(YrSold) <= 2015 && rlike(OverallCond, '7')) ~> filterYears",
 				"filterYears aggregate(groupBy(YrSold),",
 				"     averageLotArea = avg(toInteger(LotArea))) ~> aggregateLotArea",
+				"source1 select(mapColumn(",
+				"          Id,",
+				"          YearBuilt,",
+				"          LotArea",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 aggregate(groupBy(YearBuilt),",
+				"     sumLotArea = sum(toInteger(LotArea))) ~> aggregate1",
+				"aggregate1 sort(asc(YearBuilt, true)) ~> sort1",
 				"aggregateLotArea sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
@@ -129,7 +159,21 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     errorHandlingOption: 'allErrors',",
+				"     transactionCommit: 'single',",
+				"     reportSuccessOnError: false,",
+				"     outputAssertFailedRows: true,",
+				"     assertFailure_container: 'house-prices-container') ~> sink1",
+				"sort1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink2"
 			]
 		}
 	}
