@@ -22,7 +22,7 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "AzureSqlTable5",
+						"referenceName": "sqlSink2",
 						"type": "DatasetReference"
 					},
 					"name": "sink2"

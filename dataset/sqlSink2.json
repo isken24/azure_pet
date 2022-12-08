@@ -1,5 +1,5 @@
 {
-	"name": "AzureSqlTable5",
+	"name": "sqlSink2",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "demoOutputSQL",
