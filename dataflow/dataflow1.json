@@ -15,25 +15,17 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "AzureSqlTable3",
+						"referenceName": "sqlSink1",
 						"type": "DatasetReference"
 					},
-					"name": "sink1",
-					"rejectedDataLinkedService": {
-						"referenceName": "AzureBlobStorage1",
-						"type": "LinkedServiceReference"
-					}
+					"name": "sink1"
 				},
 				{
 					"dataset": {
-						"referenceName": "AzureSqlTable4",
+						"referenceName": "AzureSqlTable5",
 						"type": "DatasetReference"
 					},
-					"name": "sink2",
-					"rejectedDataLinkedService": {
-						"referenceName": "AzureBlobStorage1",
-						"type": "LinkedServiceReference"
-					}
+					"name": "sink2"
 				}
 			],
 			"transformations": [
@@ -51,6 +43,9 @@
 				},
 				{
 					"name": "sort1"
+				},
+				{
+					"name": "filter1"
 				}
 			],
 			"scriptLines": [
@@ -151,9 +146,10 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1 aggregate(groupBy(YearBuilt),",
-				"     sumLotArea = sum(toInteger(LotArea))) ~> aggregate1",
-				"aggregate1 sort(asc(YearBuilt, true)) ~> sort1",
+				"filter1 aggregate(groupBy(YearBuilt),",
+				"     LotArea = sum(toInteger(LotArea))) ~> aggregate1",
+				"aggregate1 sort(desc(YearBuilt, true)) ~> sort1",
+				"select1 filter(toInteger(YearBuilt) >= 1980) ~> filter1",
 				"aggregateLotArea sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
@@ -163,15 +159,7 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'allErrors',",
-				"     transactionCommit: 'single',",
-				"     reportSuccessOnError: false,",
-				"     outputAssertFailedRows: true,",
-				"     assertFailure_container: 'house-prices-container',",
-				"     mapColumn(",
-				"          YrSold,",
-				"          averageLotArea",
-				"     )) ~> sink1",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1",
 				"sort1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     deletable:false,",
@@ -181,15 +169,7 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'allErrors',",
-				"     transactionCommit: 'single',",
-				"     reportSuccessOnError: false,",
-				"     outputAssertFailedRows: true,",
-				"     assertFailure_container: 'house-prices-container',",
-				"     mapColumn(",
-				"          YearBuilt,",
-				"          sumLotArea",
-				"     )) ~> sink2"
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink2"
 			]
 		}
 	}
