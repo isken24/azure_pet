@@ -494,6 +494,27 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureSqlTable5')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "demoOutputSQL",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "sink2"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/demoOutputSQL')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -847,6 +868,27 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/sqlSink1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "demoOutputSQL",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "sink1"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/demoOutputSQL')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -923,18 +965,14 @@
 					"sinks": [
 						{
 							"dataset": {
-								"referenceName": "AzureSqlTable3",
+								"referenceName": "sqlSink1",
 								"type": "DatasetReference"
 							},
-							"name": "sink1",
-							"rejectedDataLinkedService": {
-								"referenceName": "AzureBlobStorage1",
-								"type": "LinkedServiceReference"
-							}
+							"name": "sink1"
 						},
 						{
 							"dataset": {
-								"referenceName": "AzureSqlTable4",
+								"referenceName": "AzureSqlTable5",
 								"type": "DatasetReference"
 							},
 							"name": "sink2"
@@ -955,6 +993,9 @@
 						},
 						{
 							"name": "sort1"
+						},
+						{
+							"name": "filter1"
 						}
 					],
 					"scriptLines": [
@@ -1055,9 +1096,10 @@
 						"     ),",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> select1",
-						"select1 aggregate(groupBy(YearBuilt),",
-						"     sumLotArea = sum(toInteger(LotArea))) ~> aggregate1",
-						"aggregate1 sort(asc(YearBuilt, true)) ~> sort1",
+						"filter1 aggregate(groupBy(YearBuilt),",
+						"     LotArea = sum(toInteger(LotArea))) ~> aggregate1",
+						"aggregate1 sort(desc(YearBuilt, true)) ~> sort1",
+						"select1 filter(toInteger(YearBuilt) >= 1980) ~> filter1",
 						"aggregateLotArea sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     deletable:false,",
@@ -1067,11 +1109,7 @@
 						"     format: 'table',",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true,",
-						"     errorHandlingOption: 'allErrors',",
-						"     transactionCommit: 'single',",
-						"     reportSuccessOnError: false,",
-						"     outputAssertFailedRows: true,",
-						"     assertFailure_container: 'house-prices-container') ~> sink1",
+						"     errorHandlingOption: 'stopOnFirstError') ~> sink1",
 						"sort1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     deletable:false,",
@@ -1087,9 +1125,8 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]",
-				"[concat(variables('factoryId'), '/datasets/AzureSqlTable3')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorage1')]",
-				"[concat(variables('factoryId'), '/datasets/AzureSqlTable4')]"
+				"[concat(variables('factoryId'), '/datasets/sqlSink1')]",
+				"[concat(variables('factoryId'), '/datasets/AzureSqlTable5')]"
 			]
 		}
 	]
