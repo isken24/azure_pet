@@ -1,0 +1,15 @@
+{
+	"name": "DestinationDataset_x49",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "demoOutputSQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"table": "train"
+		}
+	}
+}
