@@ -1,0 +1,16 @@
+{
+	"name": "DestinationDataset_bgx",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "outputSQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "autoCreatedTable",
+			"table": "AzureBlobStorageFile"
+		}
+	}
+}
