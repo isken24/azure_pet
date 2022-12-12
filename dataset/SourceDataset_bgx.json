@@ -14,9 +14,9 @@
 				"container": "house-prices-container"
 			},
 			"columnDelimiter": ",",
-			"rowDelimiter": "\n",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
+			"nullValue": "NA",
 			"quoteChar": "\""
 		},
 		"schema": [
