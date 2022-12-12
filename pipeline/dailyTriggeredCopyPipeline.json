@@ -1,0 +1,995 @@
+{
+	"name": "dailyTriggeredCopyPipeline",
+	"properties": {
+		"description": "Daily triggered pipeline to incrementally copy source data from blob to sql based on LastModifiedDate",
+		"activities": [
+			{
+				"name": "Copy_bgx",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "house-prices-container/input/"
+					},
+					{
+						"name": "Destination",
+						"value": "autoCreatedTable.AzureBlobStorageFile"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"modifiedDatetimeStart": {
+								"value": "@pipeline().parameters.windowStart",
+								"type": "Expression"
+							},
+							"modifiedDatetimeEnd": {
+								"value": "@pipeline().parameters.windowEnd",
+								"type": "Expression"
+							},
+							"wildcardFileName": "*",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings",
+							"skipLineCount": 0
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": false,
+					"validateDataConsistency": false,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "AzureBlobStorage1",
+								"type": "LinkedServiceReference"
+							},
+							"path": "house-prices-container"
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MSSubClass",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "MSSubClass",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MSZoning",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "MSZoning",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LotFrontage",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "LotFrontage",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LotArea",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "LotArea",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Street",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Street",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Alley",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Alley",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LotShape",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "LotShape",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LandContour",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "LandContour",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Utilities",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Utilities",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LotConfig",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "LotConfig",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LandSlope",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "LandSlope",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Neighborhood",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Neighborhood",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Condition1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Condition1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Condition2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Condition2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BldgType",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BldgType",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "HouseStyle",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "HouseStyle",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "OverallQual",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "OverallQual",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "OverallCond",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "OverallCond",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "YearBuilt",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "YearBuilt",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "YearRemodAdd",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "YearRemodAdd",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "RoofStyle",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "RoofStyle",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "RoofMatl",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "RoofMatl",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Exterior1st",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Exterior1st",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Exterior2nd",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Exterior2nd",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MasVnrType",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "MasVnrType",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MasVnrArea",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "MasVnrArea",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ExterQual",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ExterQual",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ExterCond",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ExterCond",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Foundation",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Foundation",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BsmtQual",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BsmtQual",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BsmtCond",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BsmtCond",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BsmtExposure",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BsmtExposure",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BsmtFinType1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BsmtFinType1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BsmtFinSF1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BsmtFinSF1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BsmtFinType2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BsmtFinType2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BsmtFinSF2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BsmtFinSF2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BsmtUnfSF",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BsmtUnfSF",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "TotalBsmtSF",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TotalBsmtSF",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Heating",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Heating",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "HeatingQC",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "HeatingQC",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CentralAir",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CentralAir",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Electrical",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Electrical",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "1stFlrSF",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "1stFlrSF",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "2ndFlrSF",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "2ndFlrSF",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "LowQualFinSF",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "LowQualFinSF",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "GrLivArea",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GrLivArea",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BsmtFullBath",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BsmtFullBath",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BsmtHalfBath",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BsmtHalfBath",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "FullBath",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "FullBath",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "HalfBath",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "HalfBath",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BedroomAbvGr",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BedroomAbvGr",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "KitchenAbvGr",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "KitchenAbvGr",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "KitchenQual",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "KitchenQual",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "TotRmsAbvGrd",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TotRmsAbvGrd",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Functional",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Functional",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Fireplaces",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Fireplaces",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "FireplaceQu",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "FireplaceQu",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "GarageType",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GarageType",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "GarageYrBlt",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GarageYrBlt",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "GarageFinish",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GarageFinish",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "GarageCars",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GarageCars",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "GarageArea",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GarageArea",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "GarageQual",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GarageQual",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "GarageCond",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GarageCond",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PavedDrive",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PavedDrive",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "WoodDeckSF",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "WoodDeckSF",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "OpenPorchSF",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "OpenPorchSF",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EnclosedPorch",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "EnclosedPorch",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "3SsnPorch",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "3SsnPorch",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ScreenPorch",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ScreenPorch",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PoolArea",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PoolArea",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PoolQC",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PoolQC",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Fence",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Fence",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MiscFeature",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "MiscFeature",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MiscVal",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "MiscVal",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MoSold",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "MoSold",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "YrSold",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "YrSold",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SaleType",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "SaleType",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SaleCondition",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "SaleCondition",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SalePrice",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "SalePrice",
+									"type": "String"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_bgx",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_bgx",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"parameters": {
+			"windowStart": {
+				"type": "String"
+			},
+			"windowEnd": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
