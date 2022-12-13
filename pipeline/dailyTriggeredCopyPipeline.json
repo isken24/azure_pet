@@ -22,6 +22,10 @@
 					{
 						"name": "Destination",
 						"value": "autoCreatedTable.AzureBlobStorageFile"
+					},
+					{
+						"name": "scheduledRunTime",
+						"value": "@trigger().scheduledTime"
 					}
 				],
 				"typeProperties": {
