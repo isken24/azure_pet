@@ -29,7 +29,18 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"writeBehavior": "insert",
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": false,
+							"keys": [
+								"Id",
+								"Street",
+								"HouseStyle",
+								"YearBuilt",
+								"LotArea",
+								""
+							]
+						},
 						"sqlWriterUseTableLock": false,
 						"disableMetricsCollection": false
 					},
@@ -1039,7 +1050,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "rawData",
+						"referenceName": "rawDataSQL",
 						"type": "DatasetReference"
 					}
 				]

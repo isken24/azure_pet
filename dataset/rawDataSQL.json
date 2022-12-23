@@ -1,5 +1,5 @@
 {
-	"name": "rawData",
+	"name": "rawDataSQL",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "rawData",
