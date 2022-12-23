@@ -1,0 +1,12 @@
+{
+	"name": "rawData",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"connectionString": "integrated security=False;encrypt=True;connection timeout=30;data source=db-server-pet.database.windows.net;initial catalog=petProjectDB;user id=isken",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDI2QjRFQ0UxLUY3RjQtNDk2OS05NjVELTJCRTU2RkZCN0YxNV9iN2Q0NTA2ZS0xY2MzLTQxYzQtYTU3Ny04NDJhYjI3YTc2NDciDQp9"
+		}
+	}
+}
