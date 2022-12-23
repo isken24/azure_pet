@@ -1,0 +1,1050 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data from Blob to SQL DB",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"modifiedDatetimeStart": "2022-12-23T00:00:00.043Z",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "AzureBlobStorage1",
+								"type": "LinkedServiceReference"
+							},
+							"path": ""
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Id",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "MSSubClass",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "MSSubClass",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "MSZoning",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "MSZoning",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "LotFrontage",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "LotFrontage",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "LotArea",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "LotArea",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Street",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Street",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Alley",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Alley",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "LotShape",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "LotShape",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "LandContour",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "LandContour",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Utilities",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Utilities",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "LotConfig",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "LotConfig",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "LandSlope",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "LandSlope",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Neighborhood",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Neighborhood",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Condition1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Condition1",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Condition2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Condition2",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BldgType",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BldgType",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "HouseStyle",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "HouseStyle",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "OverallQual",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "OverallQual",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "OverallCond",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "OverallCond",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "YearBuilt",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "YearBuilt",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "YearRemodAdd",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "YearRemodAdd",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "RoofStyle",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "RoofStyle",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "RoofMatl",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "RoofMatl",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Exterior1st",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Exterior1st",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Exterior2nd",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Exterior2nd",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "MasVnrType",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "MasVnrType",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "MasVnrArea",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "MasVnrArea",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "ExterQual",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ExterQual",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ExterCond",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ExterCond",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Foundation",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Foundation",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BsmtQual",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BsmtQual",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BsmtCond",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BsmtCond",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BsmtExposure",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BsmtExposure",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BsmtFinType1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BsmtFinType1",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BsmtFinSF1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BsmtFinSF1",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "BsmtFinType2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BsmtFinType2",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BsmtFinSF2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BsmtFinSF2",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "BsmtUnfSF",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BsmtUnfSF",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TotalBsmtSF",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TotalBsmtSF",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Heating",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Heating",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "HeatingQC",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "HeatingQC",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "CentralAir",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CentralAir",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Electrical",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Electrical",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "1stFlrSF",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "FirstFlrSF",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "2ndFlrSF",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "SecondFlrSF",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "LowQualFinSF",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "LowQualFinSF",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "GrLivArea",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GrLivArea",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "BsmtFullBath",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BsmtFullBath",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "BsmtHalfBath",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BsmtHalfBath",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "FullBath",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "FullBath",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "HalfBath",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "HalfBath",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "BedroomAbvGr",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BedroomAbvGr",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "KitchenAbvGr",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "KitchenAbvGr",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "KitchenQual",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "KitchenQual",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TotRmsAbvGrd",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TotRmsAbvGrd",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Functional",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Functional",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Fireplaces",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Fireplaces",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "FireplaceQu",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "FireplaceQu",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "GarageType",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GarageType",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "GarageYrBlt",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GarageYrBlt",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "GarageFinish",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GarageFinish",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "GarageCars",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GarageCars",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "GarageArea",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GarageArea",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "GarageQual",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GarageQual",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "GarageCond",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GarageCond",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "PavedDrive",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PavedDrive",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "WoodDeckSF",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "WoodDeckSF",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "OpenPorchSF",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "OpenPorchSF",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "EnclosedPorch",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "EnclosedPorch",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "3SsnPorch",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ThreeSsnPorch",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "ScreenPorch",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ScreenPorch",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "PoolArea",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PoolArea",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "PoolQC",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PoolQC",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Fence",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Fence",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "MiscFeature",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "MiscFeature",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "MiscVal",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "MiscVal",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "MoSold",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "MoSold",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "YrSold",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "YrSold",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "SaleType",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "SaleType",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SaleCondition",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "SaleCondition",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SalePrice",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "SalePrice",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "inputCSV",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "rawData",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}

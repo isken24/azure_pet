@@ -1,0 +1,379 @@
+{
+	"name": "rawData",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "rawData",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MSSubClass",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MSZoning",
+				"type": "varchar"
+			},
+			{
+				"name": "LotFrontage",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "LotArea",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Street",
+				"type": "varchar"
+			},
+			{
+				"name": "Alley",
+				"type": "varchar"
+			},
+			{
+				"name": "LotShape",
+				"type": "varchar"
+			},
+			{
+				"name": "LandContour",
+				"type": "varchar"
+			},
+			{
+				"name": "Utilities",
+				"type": "varchar"
+			},
+			{
+				"name": "LotConfig",
+				"type": "varchar"
+			},
+			{
+				"name": "LandSlope",
+				"type": "varchar"
+			},
+			{
+				"name": "Neighborhood",
+				"type": "varchar"
+			},
+			{
+				"name": "Condition1",
+				"type": "varchar"
+			},
+			{
+				"name": "Condition2",
+				"type": "varchar"
+			},
+			{
+				"name": "BldgType",
+				"type": "varchar"
+			},
+			{
+				"name": "HouseStyle",
+				"type": "varchar"
+			},
+			{
+				"name": "OverallQual",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "OverallCond",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "YearBuilt",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "YearRemodAdd",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RoofStyle",
+				"type": "varchar"
+			},
+			{
+				"name": "RoofMatl",
+				"type": "varchar"
+			},
+			{
+				"name": "Exterior1st",
+				"type": "varchar"
+			},
+			{
+				"name": "Exterior2nd",
+				"type": "varchar"
+			},
+			{
+				"name": "MasVnrType",
+				"type": "varchar"
+			},
+			{
+				"name": "MasVnrArea",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ExterQual",
+				"type": "varchar"
+			},
+			{
+				"name": "ExterCond",
+				"type": "varchar"
+			},
+			{
+				"name": "Foundation",
+				"type": "varchar"
+			},
+			{
+				"name": "BsmtQual",
+				"type": "varchar"
+			},
+			{
+				"name": "BsmtCond",
+				"type": "varchar"
+			},
+			{
+				"name": "BsmtExposure",
+				"type": "varchar"
+			},
+			{
+				"name": "BsmtFinType1",
+				"type": "varchar"
+			},
+			{
+				"name": "BsmtFinSF1",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BsmtFinType2",
+				"type": "varchar"
+			},
+			{
+				"name": "BsmtFinSF2",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BsmtUnfSF",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TotalBsmtSF",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Heating",
+				"type": "varchar"
+			},
+			{
+				"name": "HeatingQC",
+				"type": "varchar"
+			},
+			{
+				"name": "CentralAir",
+				"type": "varchar"
+			},
+			{
+				"name": "Electrical",
+				"type": "varchar"
+			},
+			{
+				"name": "FirstFlrSF",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SecondFlrSF",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "LowQualFinSF",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "GrLivArea",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BsmtFullBath",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BsmtHalfBath",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FullBath",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "HalfBath",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BedroomAbvGr",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "KitchenAbvGr",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "KitchenQual",
+				"type": "varchar"
+			},
+			{
+				"name": "TotRmsAbvGrd",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Functional",
+				"type": "varchar"
+			},
+			{
+				"name": "Fireplaces",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FireplaceQu",
+				"type": "varchar"
+			},
+			{
+				"name": "GarageType",
+				"type": "varchar"
+			},
+			{
+				"name": "GarageYrBlt",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "GarageFinish",
+				"type": "varchar"
+			},
+			{
+				"name": "GarageCars",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "GarageArea",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "GarageQual",
+				"type": "varchar"
+			},
+			{
+				"name": "GarageCond",
+				"type": "varchar"
+			},
+			{
+				"name": "PavedDrive",
+				"type": "varchar"
+			},
+			{
+				"name": "WoodDeckSF",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "OpenPorchSF",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EnclosedPorch",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ThreeSsnPorch",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ScreenPorch",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PoolArea",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PoolQC",
+				"type": "varchar"
+			},
+			{
+				"name": "Fence",
+				"type": "varchar"
+			},
+			{
+				"name": "MiscFeature",
+				"type": "varchar"
+			},
+			{
+				"name": "MiscVal",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MoSold",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "YrSold",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SaleType",
+				"type": "varchar"
+			},
+			{
+				"name": "SaleCondition",
+				"type": "varchar"
+			},
+			{
+				"name": "SalePrice",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "rawData"
+		}
+	}
+}

@@ -1,0 +1,33 @@
+{
+	"name": "blobToSQL_daily",
+	"properties": {
+		"description": "Trigger that will start pipeline on daily basis at 04:00 (UTC +6)",
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pipeline1",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2022-12-23T15:20:00",
+				"timeZone": "Central Asia Standard Time",
+				"schedule": {
+					"minutes": [
+						0
+					],
+					"hours": [
+						4
+					]
+				}
+			}
+		}
+	}
+}
